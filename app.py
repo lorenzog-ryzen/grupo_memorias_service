@@ -116,6 +116,3 @@ elif tab_sel == "🟢 ORCID":
 
     st.divider()
 
-    # Opción 2: Consulta manual libre
-    with st.expander("✏️ Consultar ORCID manualmente (cualquier investigador)", expanded=False):
-        render_orcid_connector(ctx)

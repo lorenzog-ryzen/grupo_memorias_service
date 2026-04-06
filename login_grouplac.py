@@ -499,12 +499,6 @@ def debug_cvlac_profile_links(html: str) -> None:
             if any(p in href for p in patterns) or any(p in label.lower() for p in [name.lower()]):
                 found[name] = href
 
-    with st.expander("Ver todos los <a href> del CvLAC"):
-        all_links = [(a.get_text(" ", strip=True), a["href"]) for a in soup.find_all("a", href=True)]
-        st.dataframe(
-            {"Texto": [l[0] for l in all_links], "URL": [l[1] for l in all_links]},
-            use_container_width=True
-        )
     return found
 # =========================
 # Líneas de investigación (Gruplac)
@@ -1143,17 +1137,17 @@ def render_orcid_connector(ctx: Dict[str, Any], fallback_orcid: str | None = Non
     col1, col2 = st.columns([1, 1])
     with col1:
         run_works = st.button("Traer Works (publicaciones)", use_container_width=True)
-    with col2:
-        run_record = st.button("Traer Record (perfil completo)", use_container_width=True)
+    # with col2:
+    #     run_record = st.button("Traer Record (perfil completo)", use_container_width=True)
 
-    if run_record:
-        try:
-            with st.spinner("Consultando ORCID /record ..."):
-                data = orcid_api_get(orcid_id, "record")
-            st.success("Record obtenido (JSON).")
-            st.json(data)
-        except Exception as e:
-            st.error(f"No se pudo consultar ORCID record: {e}")
+    # if run_record:
+    #     try:
+    #         with st.spinner("Consultando ORCID /record ..."):
+    #             data = orcid_api_get(orcid_id, "record")
+    #         st.success("Record obtenido (JSON).")
+    #         st.json(data)
+    #     except Exception as e:
+    #         st.error(f"No se pudo consultar ORCID record: {e}")
 
     if run_works:
         try:
